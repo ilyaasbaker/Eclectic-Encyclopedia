@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Eclectic Encyclopedia</title>
+  <link rel="icon" type="image/x-icon" href="Estimated_sign.svg.png">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link rel="stylesheet" href="infoPage.css">
+</head>
+<body>
+
+  <header>
+
+    <a href="index.html">
+      <h1 id="infoHeader">ECLECTIC ENCYCLOPEDIA</h1>
+    </a>
+
+  </header>
+
+   <!-- background video -->
+
+ <div class="backgroundVideoCon">
+
+    <video class="backgroundVideo" autoplay muted loop>
+      <source src="Horses.mp4" type="video/mp4">
+    </video>
+
+  </div>
+
+  <div id="infoContainer">
+
+    <div id="animalInfo"></div>
+
+   </div>
+
+</div>
+
+<!-- footer -->
+
+<footer>
+
+    <div class="footerText01">
+  
+      <div class="footerText02">&#x2731; eclectic encyclopedia &#x2731; learn something new  every day &#x2731; eclectic encyclopedia &#x2731; eclectic encyclopedia &#x2731; learn something new  every day &#x2731; eclectic encyclopedia&#160;</div>
+      <div class="footerText02">&#x2731; eclectic encyclopedia &#x2731; learn something new  every day &#x2731; eclectic encyclopedia &#x2731; eclectic encyclopedia &#x2731; learn something new  every day &#x2731; eclectic encyclopedia&#160;</div>
+    
+    </div>
+  
+  </footer>
+
+<script>
+
+// js code to call data from the api and select data at random from the array of results every 24 hours 
+function fetchAnimalInfo(search) {
+  const url = `https://api.api-ninjas.com/v1/animals?name=${search}`;
+  const apiKey = 'ZWv8zivqNtTgs3rChF3ctQ==1EnVJiHb0E6QO7Dx';
+
+  return fetch(url, {
+    method: 'GET',
+    headers: {
+      'X-Api-Key': apiKey,
+      'Content-Type': 'application/json'
+    }
+  })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok.');
+      }
+      return response.json();
+    });
+}
+
+function displayAnimalInfo(result, index) {
+  const animalInfoElement = document.getElementById('animalInfo');
+
+  if (result && result.length > 0) {
+    const animalData = result[index];
+
+    animalInfoElement.innerHTML =  
+    `<h2>${animalData.name}</h2>
+    <br><br>
+    <p>
+    The ${animalData.name}, belonging to the ${animalData.taxonomy.family} family,
+    is a member of the ${animalData.taxonomy.kingdom} kingdom and falls under the class ${animalData.taxonomy.class}.
+    Commonly found in ${animalData.locations}, it is recognized as the ${animalData.characteristics.common_name}.
+    <br><br>
+    They're ${animalData.characteristics.diet}(s) and eat ${animalData.characteristics.main_prey} and are usually found in ${animalData.characteristics.habitat}.
+    ${animalData.name}(s) have ${animalData.characteristics.color} ${animalData.characteristics.skin_type}  and weigh around ${animalData.characteristics.weight} and measure around ${animalData.characteristics.height} tall and ${animalData.characteristics.length} long.
+    This Horse has a lifespan of ${animalData.characteristics.lifespan}.
+    </p>`;
+  } else {
+    animalInfoElement.innerHTML = `<p>No data found for the given search term: ${search}.</p>`;
+  }
+}
+
+function getRandomIndex(arrayLength) {
+  return Math.floor(Math.random() * arrayLength);
+}
+
+function updateAnimalInfo(result, search) {
+  const storedTimestamp = localStorage.getItem(`${search}_lastUpdateTime`);
+  const storedIndex = localStorage.getItem(`${search}_selectedAnimalIndex`);
+  const currentIndex = storedIndex ? parseInt(storedIndex, 10) : -1;
+  const currentTime = Date.now();
+  const twentyFourHours = 24 * 60 * 60 * 1000;
+
+  if (!storedTimestamp || currentTime - parseInt(storedTimestamp, 10) >= twentyFourHours) {
+    // Filter the result array to include only animals with "family": "Equidae"
+    const animalFamily = result.filter(animal => animal.taxonomy.family && animal.taxonomy.family.toLowerCase() === 'equidae');
+
+    if (animalFamily.length > 0) {
+      const newIndex = getRandomIndex(animalFamily.length);
+      localStorage.setItem(`${search}_selectedAnimalIndex`, newIndex.toString());
+      localStorage.setItem(`${search}_lastUpdateTime`, currentTime.toString());
+      displayAnimalInfo(animalFamily, newIndex);
+    } else {
+      // Display a message when no animals with "family" equal to "Equidae" are found
+      const animalInfoElement = document.getElementById('animalInfo');
+      animalInfoElement.innerHTML = `<p>No animals with family "Equidae" found for the given search term: ${search}.</p>`;
+    }
+  } else {
+    displayAnimalInfo(result, currentIndex);
+  }
+}
+
+
+const searchTerm = 'horse'; 
+fetchAnimalInfo(searchTerm)
+  .then(result => updateAnimalInfo(result, searchTerm))
+  .catch(error => console.error(error));
+
+
+</script>
+
+</body>
+</html>

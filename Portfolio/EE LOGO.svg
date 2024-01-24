@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 844.99 911.65">
+  <defs>
+    <style>
+      .cls-1 {
+        font-family: DreamOrphanageRg-Regular, 'Dream Orphanage';
+        font-size: 72px;
+      }
+
+      .cls-1, .cls-2 {
+        fill: #231f20;
+      }
+
+      .cls-3 {
+        letter-spacing: -.03em;
+      }
+
+      .cls-4 {
+        letter-spacing: 0em;
+      }
+
+      .cls-2 {
+        stroke-width: 0px;
+      }
+    </style>
+  </defs>
+  <path class="cls-2" d="m0,765V0h390v69H124v278h166v68H124v284h266v66H0Z"/>
+  <path class="cls-2" d="m844.99,765V0h-390v69h266v278h-166v68h166v284h-266v66h390Z"/>
+  <path class="cls-2" d="m403.09,632.5V132.5h38.81v500h-38.81Z"/>
+  <text class="cls-1" transform="translate(120.35 896.24)"><tspan class="cls-4" x="0" y="0">E</tspan><tspan x="32.04" y="0">clictic Enc</tspan><tspan class="cls-3" x="326.73" y="0">y</tspan><tspan x="356.75" y="0">clop</tspan><tspan class="cls-4" x="479.37" y="0">e</tspan><tspan x="515.15" y="0">dia</tspan></text>
+</svg>

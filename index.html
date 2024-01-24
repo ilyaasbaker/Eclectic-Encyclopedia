@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Eclectic Encyclopedia</title>
+    <link rel="icon" type="image/x-icon" href="Estimated_sign.svg.png">
+    <link rel="stylesheet" href="index.css">
+    <script src="randomImagePosition.js" defer></script>
+</head>
+<body>
+
+    <!-- header -->
+
+    <header>
+
+    <div id="clockCon">
+        <p id="clock"></p>
+    </div>
+
+    <!-- overlay from https://www.w3schools.com/howto/howto_css_overlay.asp  -->
+
+    <div id="overlay" onclick="off()">
+
+        <div id="textOverlay">
+
+            <h1 style="color: rgb(255, 244, 96);">Welcome to the Eclectic Encyclopedia &#x2731;</h1>
+            <p>
+                The Eclectic Encyclopedia is a creative, self updating web database that has all types of factual data from which to learn.
+                Each image links to a page of relavant factual information.
+                For example; click on a beetle to learn about 1 of 400,000 species!<br><br> 
+
+                The content will refresh every 24 hours, giving you plenty of time to absorb and enjoy fresh knowledge.
+            
+                <br><br>
+                Check out the <a style="color: rgb(96, 197, 255); text-decoration: none;" href="https://ilyaasbakerencyclopedia.myportfolio.com" target="_blank" rel="noopener noreferrer">PORTFOLIO</a> for this project if you want a more in depth explanation. <br><br>
+
+                <h2 style="color: rgb(255, 96, 96);">DISCLAIMER</h2>
+
+                For the time being only a few datasets are being displayed, a more diverse pool 
+                of information will be added later on.
+                <br><br>
+                Some data sets may display data completely
+                unrelated to the page e.g. On the horse page because you may get information on a "Horseshoe Crab" or "Horsefly"; because the search term is "Horse".
+                So anything that contains the search term will be added to the pool of information that'll be displayed on that page. <br><br>
+                This is a filtering issue which I'm working on fixing, so that the data accuracy is 100%.
+
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="overlayBtn">
+
+        <button onclick="on()"><strong>&#x3f;</strong></button>
+
+    </div>
+      
+
+    </header>
+
+
+     <!-- images that lead to their respective info pages 4 images per data set for now just to populate the screen -->
+    <div id="imageContainer">
+
+             <!-- monkey -->
+             <a href="monkeyInfo.html">
+                <img src="Images/Monkey.png" alt="" class="monkeyImage"/>
+            </a>
+            
+            <!-- snake -->
+            <a href="snakeInfo.html">
+                <img src="Images/Snake (3).png" alt="" class="snakeImage"/>
+            </a>
+
+            <a href="snakeInfo.html">
+                <img src="Images/Snake (5).png" alt="" class="snakeImage"/>
+            </a>
+
+            <a href="snakeInfo.html">
+                <img src="Images/Snake (4).png" alt="" class="snakeImage"/>
+            </a>
+
+            <a href="snakeInfo.html">
+                <img src="Images/Snake (1).png" alt="" class="snakeImage"/>
+            </a>
+
+            <!-- frog -->
+            <a href="frogInfo.html">
+                <img src="Images/Frog (1).png" alt="" class="frogImage"/>
+            </a>
+
+            <a href="frogInfo.html">
+                <img src="Images/Frog (3).png" alt="" class="frogImage"/>
+            </a>
+
+            <a href="frogInfo.html">
+                <img src="Images/Frog (4).png" alt="" class="frogImage"/>
+            </a>
+
+            <a href="frogInfo.html">
+                <img src="Images/Frog (5).png" alt="" class="frogImage"/>
+            </a>
+
+            <!-- horse -->
+            <a href="horseInfo.html">
+                <img src="Images/Horse 01.png" alt="" class="horseImage"/>
+            </a>
+
+            <a href="horseInfo.html">
+                <img src="Images/Horse 03.png" alt="" class="horseImage"/>
+            </a>
+
+            <a href="horseInfo.html">
+                <img src="Images/Horse 04.png" alt="" class="horseImage"/>
+            </a>
+
+            <a href="horseInfo.html">
+                <img src="Images/Horse 00.png" alt="" class="horseImage"/>
+            </a>
+
+            <!-- bird -->
+            <a href="birdInfo.html">
+                <img src="Images/Bird (2).png" alt="" class="birdImage"/>
+            </a>
+
+            <a href="birdInfo.html">
+                <img src="Images/Bird (3).png" alt="" class="birdImage"/>
+            </a>
+
+            <a href="birdInfo.html">
+                <img src="Images/Bird (54).png" alt="" class="birdImage"/>
+            </a>
+
+            <a href="birdInfo.html">
+                <img src="Images/Bird (61).png" alt="" class="birdImage"/>
+            </a>
+
+            <!-- beetle -->
+            <a href="beetleInfo.html">
+                <img src="Images/Beetle (1).png" alt="" class="beetleImage"/>
+            </a>
+
+            <a href="beetleInfo.html">
+                <img src="Images/Beetle (5).png" alt="" class="beetleImage"/>
+            </a>
+
+            <a href="beetleInfo.html">
+                <img src="Images/Beetle (2).png" alt="" class="beetleImage"/>
+            </a>
+
+            <a href="beetleInfo.html">
+                <img src="Images/Beetle (3).png" alt="" class="beetleImage"/>
+            </a>
+
+            <!-- fish -->
+            <a href="fishInfo.html">
+                <img src="Images/Fish 01.png" alt="" class="fishImage"/>
+            </a>
+
+            <a href="fishInfo.html">
+                <img src="Images/Fish 05.png" alt="" class="rndmImage"/>
+            </a>
+
+            <a href="fishInfo.html">
+                <img src="Images/Fish 00.png" alt="" class="fishImage"/>
+            </a>
+
+            <a href="fishInfo.html">
+                <img src="Images/Fish 07.png" alt="" class="rndmImage"/>
+            </a>
+
+            
+
+                
+    </div>
+
+
+
+
+   <!-- footer -->
+
+<footer>
+
+    <div class="footerText01">
+  
+      <div class="footerText02">&#x2731; eclectic encyclopedia &#x2731; learn something new  every day &#x2731; eclectic encyclopedia &#x2731; eclectic encyclopedia &#x2731; learn something new  every day &#x2731; eclectic encyclopedia&#160;</div>
+      <div class="footerText02">&#x2731; eclectic encyclopedia &#x2731; learn something new  every day &#x2731; eclectic encyclopedia &#x2731; eclectic encyclopedia &#x2731; learn something new  every day &#x2731; eclectic encyclopedia&#160;</div>
+    
+    </div>
+  
+  </footer>
+
+
+  <!-- clock for the header: https://flexiple.com/javascript/javascript-clock  -->
+    <script>
+
+        function currentTime() {
+            let date = new Date(); 
+            let hh = date.getHours();
+            let mm = date.getMinutes();
+            let ss = date.getSeconds();
+
+            hh = (hh < 10) ? "0" + hh : hh;
+            mm = (mm < 10) ? "0" + mm : mm;
+            ss = (ss < 10) ? "0" + ss : ss;
+                
+            let time = " " + hh + ":" + mm + ":" + ss + " ";
+
+            document.getElementById("clock").innerText = `${time}`; 
+            var t = setTimeout(function(){ currentTime() }, 1000); 
+
+            }
+
+            currentTime();
+
+    </script>
+
+    <!-- overlay script -->
+
+    <script>
+
+        function on() {
+        document.getElementById("overlay").style.display = "block";
+        }
+
+        function off() {
+        document.getElementById("overlay").style.display = "none";
+        }
+
+    </script>
+
+</body>
+</html>

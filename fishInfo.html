@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Eclectic Encyclopedia</title>
+  <link rel="icon" type="image/x-icon" href="Estimated_sign.svg.png">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link rel="stylesheet" href="infoPage.css">
+</head>
+<body>
+
+  <header>
+    <a href="index.html">
+      <h1 id="infoHeader">ECLECTIC ENCYCLOPEDIA</h1>
+    </a>
+  </header>
+
+       <!-- background video -->
+
+ <div class="backgroundVideoCon">
+
+    <video class="backgroundVideo" autoplay muted loop>
+      <source src="Fish.mp4" type="video/mp4">
+    </video>
+
+  </div>
+
+  <div id="infoContainer">
+
+    <div id="animalInfo"></div>
+
+   </div>
+
+<!-- footer -->
+
+<footer>
+
+    <div class="footerText01">
+  
+      <div class="footerText02">&#x2731; eclectic encyclopedia &#x2731; learn something new  every day &#x2731; eclectic encyclopedia &#x2731; eclectic encyclopedia &#x2731; learn something new  every day &#x2731; eclectic encyclopedia&#160;</div>
+      <div class="footerText02">&#x2731; eclectic encyclopedia &#x2731; learn something new  every day &#x2731; eclectic encyclopedia &#x2731; eclectic encyclopedia &#x2731; learn something new  every day &#x2731; eclectic encyclopedia&#160;</div>
+    
+    </div>
+  
+  </footer>
+
+<script>
+
+// js code to call data from the api and select data at random from the array of results every 24 hours 
+function fetchAnimalInfo(search) {
+  const url = `https://api.api-ninjas.com/v1/animals?name=${search}`;
+  const apiKey = 'ZWv8zivqNtTgs3rChF3ctQ==1EnVJiHb0E6QO7Dx';
+
+  return fetch(url, {
+    method: 'GET',
+    headers: {
+      'X-Api-Key': apiKey,
+      'Content-Type': 'application/json'
+    }
+  })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok.');
+      }
+      return response.json();
+    });
+}
+
+function displayAnimalInfo(result, index) {
+  const animalInfoElement = document.getElementById('animalInfo');
+
+  if (result && result.length > 0) {
+    const animalData = result[index];
+    const aggressionLevel = animalData.characteristics.aggression;
+    const dietType = animalData.characteristics.diet.toLowerCase();
+
+    animalInfoElement.innerHTML =  
+    `<h1>${animalData.name}</h1>
+    <br><br>
+    <p>
+    <h3>Taxonomy:</h3>
+    Kingdom: ${animalData.taxonomy.kingdom}<br>
+    Phylum: ${animalData.taxonomy.phylum}<br>
+    Class: ${animalData.taxonomy.class}<br>
+    Order: ${animalData.taxonomy.order}<br>
+    Family: ${animalData.taxonomy.family}<br>
+    Genus: ${animalData.taxonomy.genus}<br><br>
+    <h3>Locations:</h3>
+    Locations: ${animalData.locations}<br>
+    Habitat: ${animalData.characteristics.habitat}<br><br>
+    <h3>Characteristics:</h3>
+    Prey: ${animalData.characteristics.prey || animalData.characteristics.main_prey}<br>
+    Biggest Threat: ${animalData.characteristics.biggest_threat}<br>
+    Distinctive Feature: ${animalData.characteristics.most_distinctive_feature}<br>
+    Water Type: ${animalData.characteristics.water_type}<br>
+    Average Spawn Size: ${animalData.characteristics.average_spawn_size || 'Unknown'}<br>
+    Predators: ${animalData.characteristics.predators}<br>
+    Diet: ${animalData.characteristics.diet}<br>
+    Number of Species: ${animalData.characteristics.number_of_species || 'Unknown'}<br>
+    Slogan: ${animalData.characteristics.slogan || 'Not available'}<br>
+    Color: ${animalData.characteristics.color}<br>
+    Skin Type: ${animalData.characteristics.skin_type}<br>
+    Lifespan: ${animalData.characteristics.lifespan || 'Unknown'}<br>
+    Weight: ${animalData.characteristics.weight || 'Unknown'}<br>
+    Length: ${animalData.characteristics.length || 'Unknown'}<br>
+    </p>`;
+  } else {
+    animalInfoElement.innerHTML = `<p>No data found for the given search term: ${search}.</p>`;
+  }
+}
+
+function getRandomIndex(arrayLength) {
+  return Math.floor(Math.random() * arrayLength);
+}
+
+function updateAnimalInfo(result, search) {
+  const storedTimestamp = localStorage.getItem(`${search}_lastUpdateTime`);
+  const storedIndex = localStorage.getItem(`${search}_selectedAnimalIndex`);
+  const currentIndex = storedIndex ? parseInt(storedIndex, 10) : -1;
+  const currentTime = Date.now();
+  const twentyFourHours = 24 * 60 * 60 * 1000;
+
+  if (!storedTimestamp || currentTime - parseInt(storedTimestamp, 10) >= twentyFourHours) {
+    const newIndex = getRandomIndex(result.length);
+    localStorage.setItem(`${search}_selectedAnimalIndex`, newIndex.toString());
+    localStorage.setItem(`${search}_lastUpdateTime`, currentTime.toString());
+    displayAnimalInfo(result, newIndex);
+  } else {
+    displayAnimalInfo(result, currentIndex);
+  }
+}
+
+const searchTerm = 'fish'; 
+fetchAnimalInfo(searchTerm)
+  .then(result => updateAnimalInfo(result, searchTerm))
+  .catch(error => console.error(error)); 
+
+</script>
+
+</body>
+</html>

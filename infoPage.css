@@ -1,0 +1,167 @@
+* {
+    padding: 0;
+    margin: auto;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    
+  }
+
+  a {
+
+    text-decoration: none;
+    color: aliceblue;
+
+  }
+  
+  body {
+
+    font-family: Arial, Helvetica, sans-serif;
+    letter-spacing: 1px;
+    word-spacing: 3px;
+    font-weight: 530;
+    overflow: hidden;
+
+  }
+  
+  /* header */
+
+  header {
+
+    padding: 10px;
+    text-align: center;
+    display: block;
+    margin: auto;
+
+  }
+
+  #infoHeader {
+
+    display: inline;
+    font-weight: bolder;
+    text-shadow: 1px 1px 25px rgba(0, 0, 0, 0.2);
+
+  }
+
+  #infoHeader:hover {
+    
+    letter-spacing: 5px; 
+    font-weight: normal;
+    transition: ease;
+    filter: blur(1px);
+    text-shadow: 1px 1px 25px rgba(0, 0, 0, 0.4);
+
+}
+
+#infoHeader:link {
+    
+    color: aliceblue;
+}
+
+/* body */
+
+#infoContainer {
+
+  
+    width: 100%;
+    height: auto;
+    top: 10%;
+    bottom: 50%;
+    position: absolute;
+    padding: 15px;
+    /* background-color: rgba(0, 0, 0, 0.5); */
+    color: black;
+    word-wrap: break-word;
+
+
+  }
+
+  #animalInfo {
+
+   text-align: justify;
+   align-items: center;
+   background-color: rgba(0, 0, 0, 0.5);
+   max-width: 1000px;
+   width: 100%;
+   padding: 20px;
+   color: aliceblue;
+   /* font-size: 1.5vw; */
+
+  }
+
+  /* background video */
+  .backgroundVideoCon {
+
+    min-width: 100%; 
+    min-height: 100%; 
+    width: auto;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    z-index: -1;
+
+}
+
+.backgroundVideo {
+
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    z-index: 1;
+
+}
+
+  /* scrolling footer template from https://fullcircledesign.org/blog/how-to-create-a-horizontal-scrolling-component-that-loops-seamlessly/ */
+
+  @keyframes infiniteScroll {
+
+    from {transform: translateX(0)}
+    to {transform: translateX(-50%)}
+
+  }
+
+  footer {
+
+    width: 100%;
+    overflow-x: hidden;
+    padding: 20px;
+    border-radius: 1px;
+    background-color: aliceblue;
+    position: fixed;
+    padding: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    font-size: 100%;
+    font: inherit;
+    text-align: center;
+    font-family: monospace;
+    color: black;
+
+  }
+
+  .footerText01 {
+
+    display: flex;
+    font-size: 15px;
+    padding: 10px;
+    width: 2600px;
+    animation-name: infiniteScroll;
+    animation-duration: 20s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+
+  }
+
+  .footerText02 {
+
+    white-space: nowrap;
+    font-weight: bolder;
+   
+  }

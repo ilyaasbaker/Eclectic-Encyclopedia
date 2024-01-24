@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Eclectic Encyclopedia</title>
+  <link rel="icon" type="image/x-icon" href="Estimated_sign.svg.png">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link rel="stylesheet" href="infoPage.css">
+</head>
+<body>  
+
+    <!-- header -->
+
+  <header>
+    <a href="index.html">
+      <h1 id="infoHeader">ECLECTIC ENCYCLOPEDIA</h1>
+    </a>
+  </header>
+
+
+      <!-- background video -->
+
+ <div class="backgroundVideoCon">
+
+    <video class="backgroundVideo" autoplay muted loop>
+      <source src="Beetles.mp4" type="video/mp4">
+    </video>
+
+  </div>
+
+    <div id="infoContainer">
+
+     <div id="animalInfo"></div>
+
+    </div>
+
+<!-- footer -->
+
+<footer>
+
+    <div class="footerText01">
+  
+      <div class="footerText02">&#x2731; eclectic encyclopedia &#x2731; learn something new  every day &#x2731; eclectic encyclopedia &#x2731; eclectic encyclopedia &#x2731; learn something new  every day &#x2731; eclectic encyclopedia&#160;</div>
+      <div class="footerText02">&#x2731; eclectic encyclopedia &#x2731; learn something new  every day &#x2731; eclectic encyclopedia &#x2731; eclectic encyclopedia &#x2731; learn something new  every day &#x2731; eclectic encyclopedia&#160;</div>
+    
+    </div>
+  
+  </footer>
+
+<script>
+
+// Data fetch + display api
+function fetchAnimalInfo(search) {
+  const url = `https://api.api-ninjas.com/v1/animals?name=${search}`;
+  const apiKey = 'ZWv8zivqNtTgs3rChF3ctQ==1EnVJiHb0E6QO7Dx';
+
+  return fetch(url, {
+    method: 'GET',
+    headers: {
+      'X-Api-Key': apiKey,
+      'Content-Type': 'application/json'
+    }
+  })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok.');
+      }
+      return response.json();
+    });
+}
+
+// Display format
+function displayAnimalInfo(result, index) {
+
+  const animalInfoElement = document.getElementById('animalInfo');
+
+  if (result && result.length > 0) {
+    const animalData = result[index];
+
+    animalInfoElement.innerHTML =  
+
+    `<h2>${animalData.name}</h2>
+    <br><br>
+    <p>
+    The ${animalData.name}, classified as ${animalData.taxonomy.class} from the
+    ${animalData.taxonomy.phylum} phylum within the ${animalData.taxonomy.kingdom} kingdom, is commonly found in
+    ${animalData.locations}. They give birth to an average litter of ${animalData.characteristics.litter_size}. 
+    <br><br>
+    Commonly known as the ${animalData.characteristics.common_name}, it's known for it's ${animalData.characteristics.group_behavior} behavior, characterized by ${animalData.characteristics.most_distinctive_feature}
+    and has a gestation period of ${animalData.characteristics.gestation_period}.
+    They can be found living (in)(the) ${animalData.characteristics.habitat}. 
+    <br><br>
+    The species faces predators such as ${animalData.characteristics.predators}
+    it showcases a distinctive ${animalData.characteristics.color} color on it's ${animalData.characteristics.skin_type}. The ${animalData.name}  has a lifespan of up to ${animalData.characteristics.lifespan}, 
+    on average it weighs between ${animalData.characteristics.weight} 
+    and measures ${animalData.characteristics.length}.</p>`;
+
+  } else {
+
+    animalInfoElement.innerHTML = `<p>No data found for the given search term: ${search}.</p>`;
+
+  }
+}
+
+// Random index selection
+function getRandomIndex(arrayLength) {
+
+  return Math.floor(Math.random() * arrayLength);
+  
+}
+
+// Updating + storing data
+function updateAnimalInfo(result, search) {
+  const storedTimestamp = localStorage.getItem(`${search}_lastUpdateTime`);
+  const storedIndex = localStorage.getItem(`${search}_selectedAnimalIndex`);
+  const currentIndex = storedIndex ? parseInt(storedIndex, 10) : -1;
+  const currentTime = Date.now();
+  const twentyFourHours = 24 * 60 * 60 * 1000;
+
+  if (!storedTimestamp || currentTime - parseInt(storedTimestamp, 10) >= twentyFourHours) {
+    const newIndex = getRandomIndex(result.length);
+    localStorage.setItem(`${search}_selectedAnimalIndex`, newIndex.toString());
+    localStorage.setItem(`${search}_lastUpdateTime`, currentTime.toString());
+    displayAnimalInfo(result, newIndex);
+  } else {
+    displayAnimalInfo(result, currentIndex);
+  }
+}
+
+// Setting the search term for each page and fetching the animal information
+const searchTerm = 'beetle'; 
+fetchAnimalInfo(searchTerm)
+  .then(result => updateAnimalInfo(result, searchTerm))
+  .catch(error => console.error(error));
+
+</script>
+
+
+</body>
+</html>
